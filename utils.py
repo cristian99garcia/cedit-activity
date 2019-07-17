@@ -21,7 +21,7 @@
 import os
 import globals as G
 
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 
 from gi.repository import Gtk
 from gi.repository import Gio
@@ -55,7 +55,7 @@ def get_pixbuf_from_path(path, size=62):
             return GdkPixbuf.Pixbuf.new_from_file_at_size(path, size, size)
 
         for tipo in types:
-            if tipo in G.IMAGES.keys():
+            if tipo in list(G.IMAGES.keys()):
                 return GdkPixbuf.Pixbuf.new_from_file_at_size(
                     G.IMAGES[tipo], size, size)
 
@@ -154,7 +154,7 @@ def set_border_radius(widget, r1=0, r2=0, r3=0, r4=0):
         (name, r1, r2, r3, r4)
 
     css_provider_up = Gtk.CssProvider()
-    css_provider_up.load_from_data(theme)
+    css_provider_up.load_from_data(theme.encode())
 
     style_context = widget.get_style_context()
     style_context.add_provider(

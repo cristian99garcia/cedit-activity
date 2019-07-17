@@ -86,7 +86,7 @@ class FontComboBox(Gtk.ToolItem):
         radius = 2 * subcell_size
         theme = "GtkButton { border-radius: %dpx; }" % radius
         css_provider = Gtk.CssProvider()
-        css_provider.load_from_data(theme)
+        css_provider.load_from_data(theme.encode())
         style_context = bt.get_style_context()
         style_context.add_provider(
             css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER)

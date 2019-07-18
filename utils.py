@@ -80,7 +80,7 @@ def get_pixbuf_from_path(path, size=62):
             try:
                 return icon_theme.choose_icon(types, size, 0).load_icon()
 
-            except:
+            except BaseException:
                 # pixbuf = icon_theme.load_icon(icon, size, 0)
                 pass
 

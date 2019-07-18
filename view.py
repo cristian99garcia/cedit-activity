@@ -245,7 +245,7 @@ class View(GtkSource.View):
     def save_file_instance(self, path):
         self.buffer.set_language_from_file(path)
         with open(path, "w") as file:
-            file.write(str(int(self.buffer.get_modified()))+ "\n")
+            file.write(str(int(self.buffer.get_modified())) + "\n")
             file.write(self.buffer.get_all_text())
 
     def save_file(self, path):

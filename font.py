@@ -259,8 +259,8 @@ class FontSize(Gtk.ToolItem):
         self.show_all()
 
     def __size_allocate_cb(self, button, rect):
-        self._size_entry.set_size_request(1,
-            self._size_up.get_allocation().height)
+        self._size_entry.set_size_request(
+            1, self._size_up.get_allocation().height)
 
     def __entry_cb(self, entry):
         try:

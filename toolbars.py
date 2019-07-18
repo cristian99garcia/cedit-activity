@@ -202,7 +202,7 @@ class ViewToolbar(Gtk.Toolbar):
         # Ensuring that the value is displayed when starting:
         self.spinner_right_line.set_value(conf["right-line-pos"])
         self.spinner_right_line.connect('notify::value',
-            self.__right_line_pos_changed_cb)
+                                        self.__right_line_pos_changed_cb)
 
         toolItem1.add(self.spinner_right_line)
         self.insert(toolItem1, -1)

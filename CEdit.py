@@ -45,7 +45,7 @@ class CEdit(activity.Activity):
 
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
-        self.instance_path = join(activity.get_activity_root(),'instance')
+        self.instance_path = join(activity.get_activity_root(), 'instance')
         self.index_file = join(self.instance_path, 'index')
 
         self.get_conf()
@@ -65,13 +65,13 @@ class CEdit(activity.Activity):
         self.toolbar_box.connect("replace-text", self.replace_text)
         self.toolbar_box.connect("font-size-changed", self.font_size_changed)
         self.toolbar_box.connect(
-                "font-family-changed", self.font_family_changed)
+            "font-family-changed", self.font_family_changed)
         self.toolbar_box.connect(
-                "show-line-numbers-changed", self.show_line_numbers_changed)
+            "show-line-numbers-changed", self.show_line_numbers_changed)
         self.toolbar_box.connect(
-                "show-right-line-changed", self.show_right_line_changed)
+            "show-right-line-changed", self.show_right_line_changed)
         self.toolbar_box.connect(
-                "right-line-pos-changed", self.right_line_pos_changed)
+            "right-line-pos-changed", self.right_line_pos_changed)
         self.toolbar_box.connect("theme-changed", self.theme_changed)
         self.set_toolbar_box(self.toolbar_box)
 
@@ -166,11 +166,11 @@ class CEdit(activity.Activity):
         self.toolbar_box.button_redo.set_sensitive(buffer.can_redo())
         self.toolbar_box.button_save.set_sensitive(buffer.get_modified())
         self.toolbar_box.entry_search.set_sensitive(
-                bool(buffer.get_all_text()))
+            bool(buffer.get_all_text()))
         self.toolbar_box.entry_replace.set_sensitive(
-                bool(buffer.get_all_text()))
+            bool(buffer.get_all_text()))
         self.toolbar_box.spinner_right_line.set_sensitive(
-                self.conf["show-right-line"])
+            self.conf["show-right-line"])
         self.infobar.set_language(buffer.get_language_str())
         self.update_cursor_position(buffer)
 
@@ -185,7 +185,7 @@ class CEdit(activity.Activity):
         if not label:
             label = view.get_file_name()
 
-        if type(label) == str:
+        if isinstance(label, str):
             label = Gtk.Label(label)
             label.modify_font(Pango.FontDescription("15 bold"))
 
@@ -382,7 +382,7 @@ class CEdit(activity.Activity):
             self.alert.props.msg = msg
 
             self.alert.add_button(
-                    Gtk.ResponseType.CANCEL, _("Cancel"), icon=cancel)
+                Gtk.ResponseType.CANCEL, _("Cancel"), icon=cancel)
             self.alert.add_button(Gtk.ResponseType.NO, _("No save"), icon=no)
             self.alert.add_button(Gtk.ResponseType.YES, _("Save"), icon=save)
 
@@ -486,7 +486,7 @@ class CEdit(activity.Activity):
         x = 0
         views = self.notebook.get_children()
 
-        with open(self.index_file,'w') as f:
+        with open(self.index_file, 'w') as f:
             for scrolled in views:
                 view = scrolled.get_children()[0]
                 name = view.get_file()
@@ -497,7 +497,7 @@ class CEdit(activity.Activity):
                 view.save_file_instance(path)
                 if not name or x != len(views) - 1:
                     f.write('\n')
-                x+=1
+                x += 1
 
         files = []
         for scrolled in views:
@@ -537,7 +537,7 @@ class CEdit(activity.Activity):
 
                 file_chooser = FileChooserSave()
                 file_chooser.connect(
-                        "save-file", self._save_file_from_chooser, True)
+                    "save-file", self._save_file_from_chooser, True)
                 file_chooser.connect("destroy", _remove_page, scrolled)
                 file_chooser.show_all()
 
@@ -550,7 +550,7 @@ class CEdit(activity.Activity):
             msg = G.TEXT_IF_NOT_SAVE
 
             no = Gtk.Image.new_from_icon_name(
-                    "activity-stop", Gtk.IconSize.MENU)
+                "activity-stop", Gtk.IconSize.MENU)
 
             save = Gtk.Image.new_from_icon_name("filesave", Gtk.IconSize.MENU)
 

@@ -160,7 +160,7 @@ class FileChooser(Gtk.Window):
                 index += 1
 
         self.model.insert(
-                index, [filename, utils.get_pixbuf_from_path(path), path])
+            index, [filename, utils.get_pixbuf_from_path(path), path])
 
     def __remove_item(self, path):
         filename = os.path.basename(path)
@@ -181,7 +181,7 @@ class FileChooser(Gtk.Window):
 
         self._gfile = Gio.File.new_for_path(self.folder)
         self._file_monitor = Gio.File.monitor(
-                self._gfile, Gio.FileMonitorFlags.NONE, None)
+            self._gfile, Gio.FileMonitorFlags.NONE, None)
         self._files_changed_idx = \
             self._file_monitor.connect("changed", self.__files_changed_cb)
 
@@ -227,8 +227,7 @@ class FileChooser(Gtk.Window):
             self.model.append([filename, pixbuf, path])
 
     def check_files(self):
-        files = os.listdir(self.folder)
-        files.sort()
+        files = sorted(os.listdir(self.folder))
 
         if files != self.files:
             self.selected_path = None
@@ -269,7 +268,7 @@ class FileChooserOpen(FileChooser):
     def __make_toolbar(self):
         self.toolbar = Gtk.Toolbar()
         self.toolbar.modify_bg(
-                Gtk.StateType.NORMAL, style.COLOR_TOOLBAR_GREY.get_gdk_color())
+            Gtk.StateType.NORMAL, style.COLOR_TOOLBAR_GREY.get_gdk_color())
 
         self.toolbar.insert(self.go_up_button, -1)
 
@@ -549,7 +548,7 @@ class FileChooserSave(FileChooser):
         self.alert.props.title = G.TEXT_FILE_ALREADY_EXISTS
         self.alert.props.msg = G.TEXT_OVERWRITE_QUESTION.replace("****", path)
         cancel = Gtk.Image.new_from_icon_name(
-                "dialog-cancel", Gtk.IconSize.MENU)
+            "dialog-cancel", Gtk.IconSize.MENU)
         save = Gtk.Image.new_from_icon_name("filesave", Gtk.IconSize.MENU)
         self.alert.add_button(Gtk.ResponseType.NO, _("Cancel"), icon=cancel)
         self.alert.add_button(Gtk.ResponseType.YES, _("Save"), icon=save)
@@ -591,7 +590,7 @@ class FileChooserSave(FileChooser):
             path = view.get_path_at_pos(int(event.x), int(event.y))
             iter = self.model.get_iter(path)
             directory = os.path.join(
-                    self.folder, self.model.get_value(iter, 0))
+                self.folder, self.model.get_value(iter, 0))
 
             if event.type.value_name == "GDK_2BUTTON_PRESS":
                 if os.path.isdir(directory):
